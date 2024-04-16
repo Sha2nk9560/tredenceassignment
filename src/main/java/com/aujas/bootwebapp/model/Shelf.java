@@ -16,6 +16,8 @@ private Long shelfId;
         private String productId;
 @Column
     private Double relevancyScore;
+
+
 @JsonIgnore
 @ManyToOne(cascade = CascadeType.ALL)
 @JoinColumn(name = "id")

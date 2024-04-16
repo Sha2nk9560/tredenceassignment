@@ -20,6 +20,8 @@ public class ShopperPersionalizedProductListDetail {
     @Column
     @NotBlank
     private String shopperId;
+
+
 @OneToMany(mappedBy = "obj",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 
     private List<Shelf> shelf;

@@ -23,6 +23,8 @@ private Long pmdId;
     private String category;
     @Column
     @NotBlank
+
+
     private String brand;
 
 
