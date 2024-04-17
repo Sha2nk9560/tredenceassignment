@@ -14,17 +14,7 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-  @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<APIResponse> handleUserNotFoundException(UserNotFoundException ex) {
-        return new ResponseEntity<APIResponse>(new APIResponse(ex.getMessage(), HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(StudentNotFoundExeption.class)
-    public ResponseEntity<APIResponse> handleStudentNotFoundExeption(StudentNotFoundExeption ex)
-    {
-
-        return new ResponseEntity<>(new APIResponse(ex.getMessage(),HttpStatus.NOT_FOUND),HttpStatus.NOT_FOUND);
-    }
+  
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
