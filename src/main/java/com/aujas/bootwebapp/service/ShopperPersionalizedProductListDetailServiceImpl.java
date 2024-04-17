@@ -1,7 +1,10 @@
 package com.aujas.bootwebapp.service;
 
+import com.aujas.bootwebapp.dto.ProductMetaDTO;
+import com.aujas.bootwebapp.model.ProductMeta;
 import com.aujas.bootwebapp.model.Shelf;
 import com.aujas.bootwebapp.model.ShopperPersionalizedProductListDetail;
+import com.aujas.bootwebapp.repository.ProductMetaRepository;
 import com.aujas.bootwebapp.repository.ShopperPersionalizedProductListDetailRepo;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +18,9 @@ public class ShopperPersionalizedProductListDetailServiceImpl implements Shopper
 @Autowired
 private ShopperPersionalizedProductListDetailRepo repo;
 @Autowired
-    ModelMapper modelMapper;
+private ProductMetaRepository metaRepository;
+@Autowired
+   private  ModelMapper modelMapper;
     @Override
     @Transactional
     public ShopperPersionalizedProductListDetail save(ShopperPersionalizedProductListDetail obj) {
@@ -35,4 +40,32 @@ obj.setShopperId(obj.getShopperId());
       return repo.save(obj);
 
     }
+
+    @Override
+    public List<ProductMetaDTO> findByShopperId(String shopperId) {
+        List<ProductMetaDTO> listProductMetas = new ArrayList<>();
+     ShopperPersionalizedProductListDetail obj = repo.findByShopperId(shopperId);
+     if(obj != null)
+     {
+        for(Shelf ref :obj.getShelf())
+        {
+
+       ProductMeta productMeta =     metaRepository.findByProductId(ref.getProductId());
+       if(productMeta != null)
+
+       {
+          listProductMetas.add(modelMapper.map(productMeta,ProductMetaDTO.class));
+
+
+       }
+
+        }
+
+     }
+
+        System.out.println("Size Of List Product Meta Data :"+listProductMetas.size());
+        return listProductMetas;
+    }
+
+
 }

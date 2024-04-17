@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ShopperPersionalizedProductListDetailRepo extends JpaRepository<ShopperPersionalizedProductListDetail,Long> {
+
+public ShopperPersionalizedProductListDetail findByShopperId(String shopperId);
+
 }

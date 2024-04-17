@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductMetaRepository extends JpaRepository<ProductMeta,Long> {
+
+public ProductMeta findByProductId(String productId);
 }
